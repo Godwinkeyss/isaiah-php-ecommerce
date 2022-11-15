@@ -31,6 +31,7 @@ h6 {
 }
 a {
   color: #111;
+  
 }
 .nav-buttons {
   margin-left: 50%;
@@ -201,12 +202,15 @@ hr {
 }
 .product img {
   transition: 0.3s all;
+  width: 300px;
+  height: 300px;
 }
 .product:hover img {
   opacity: 0.7;
 }
 .product .buy-btn {
   background-color: #fb774b;
+  color:#fff;
   transform: translateY(50px);
   opacity: 0;
   transition: 0.3s all;
@@ -215,6 +219,7 @@ hr {
 .product:hover .buy-btn {
   transform: translateY(0px);
   opacity: 1;
+  
 }
 
 .star {
@@ -515,7 +520,10 @@ th:last-child {
   height: 80px;
   margin-right: 10px;
 }
-
+.orders .order-details-btn{
+  color:#fff;
+  background-color: #fb774b;
+}
 /* checkout */
 
 #checkout-form .checkout-small-element {
@@ -539,4 +547,23 @@ th:last-child {
 /* contact */
 #contact span {
   color: #fb774b;
+}
+/* shop all product */
+
+.shop{
+  display: flex;
+}
+.ship-btn{
+background-color:#fb774b ;
+text-decoration: none;
+color: #fff;
+padding: 10px 20px;
+margin-top: 50px;
+border-radius: 5px;
+}
+@media screen and (max-width:800px){
+  .shop{
+    flex-direction: column;
+    
+  }
 }
