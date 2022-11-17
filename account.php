@@ -30,6 +30,8 @@ if(isset($_POST['change_password'])){
       // if password is less than 6 characters
       else if(strlen($password) < 6){
         header('Location: account.php?error=password must be at least 6 characters');
+
+        // no errors
     }else{
       $stmt = $pdo->prepare('UPDATE users SET user_password = :user_password WHERE user_email=:user_email');
        $stmt->bindValue(':user_password',md5($password));
@@ -59,58 +61,16 @@ if(isset($_SESSION['logged_in'])){
 
 ?>
 <?php  include('layouts/header.php') ?>
-        <div class="container">
-          <a class="navbar-brand" href="#"><h2 class="brand">Grapec</h2></a>
-  
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div
-            class="collapse navbar-collapse nav-buttons"
-            id="navbarSupportedContent"
-          >
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="index.html"
-                  >Home</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="shop.php">Products</a>
-              </li>
-  
-              <li class="nav-item">
-                <a class="nav-link" href="#">Blog</a>
-              </li>
-  
-              <li class="nav-item">
-                <a class="nav-link" href="contact.html">Contact us</a>
-              </li>
-  
-              <li class="nav-item">
-                <a class="nav-link" href="cart.html"
-                  ><i class="fa-solid fa-cart-shopping"></i
-                ></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="account.html"><i class="fa-solid fa-user"></i></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-
     <!-- Account -->
     <section class="my-5 py-5">
       <div class="container row mx-auto">
+
+       <?php if(isset($_GET['payment_message'])){ ?>
+         
+        <p class="mt-5 text-center text-success h5"><?php echo $_GET['payment_message'];  ?></p>
+        <?php } ?>
+
+      
         <div class="text-center mt-3 pt-5 col-lg-6 col-md-12">
         <p class="text-center" style="color:green"><?php if(isset($_GET['login_success'])){echo $_GET['login_success'];} ?></p>
         <p class="text-center" style="color:green"><?php if(isset($_GET['register_success'])){echo $_GET['register_success'];} ?></p>

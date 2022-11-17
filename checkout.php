@@ -1,14 +1,14 @@
 <?php
   session_start();
 
-  if( !empty($_SESSION['cart']) && isset($_POST['checkout'])){
+  if( !empty($_SESSION['cart'])){
 
     // let user in
 
 
     // send user to home page
   }else{
-    header('Location:index.php');
+    header('location:index.php');
   }
 
 
@@ -28,6 +28,12 @@
     </div>
     <div class="mx-auto container">
       <form action="server/place_order.php" method="POST" id="checkout-form">
+        <p class="text-center" style="color:red;">
+        <?php if(isset($_GET['message'])){echo $_GET['message'];}  ?>
+         <?php if(isset($_GET['message']))  {?>
+             <a href="login.php" class="btn btn-primary">Login</a>
+          <?php  } ?>
+      </p>
         <div class="form-group checkout-small-element">
           <label for="">Name</label>
           <input
