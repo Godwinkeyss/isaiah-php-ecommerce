@@ -94,15 +94,19 @@ if(isset($_POST['add_to_cart'])){
 }
 
 function calculateTotalCart(){
-  $total = 0;
+  $total_price = 0;
+  $total_quantity = 0;
+
   foreach($_SESSION['cart'] as $key => $value){
    $product = $_SESSION['cart'][$key];
    $price = $product['product_price'];
    $quantity = $product['product_quantity'];
 
-   $total =$total +($price * $quantity);
+   $total_price =$total_price +($price * $quantity);
+   $total_quantity = $total_quantity + $quantity;
   }
-  $_SESSION['total'] = $total;
+  $_SESSION['total'] = $total_price;
+  $_SESSION['quantity'] = $total_quantity;
 }
 
 
@@ -112,7 +116,7 @@ function calculateTotalCart(){
 
 
 
-<?php  include('layouts/header.php') ?>
+<?php  include('layouts/header2.php') ?>
     <!-- end of navbar -->
 
     <!-- cart -->
@@ -172,7 +176,7 @@ function calculateTotalCart(){
         
       </table>
       <div class="cart-total">
-        <table>
+        <table class="">
           <!-- <tr>
             <td>Subtotal</td>
             <td>$2555</td>

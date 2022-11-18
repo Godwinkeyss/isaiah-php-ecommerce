@@ -127,7 +127,8 @@
           </div>
           <h5 class="p-name"><?php echo $product['product_name'] ?></h5>
           <h4 class="p-price">$<?php echo $product['product_price'] ?></h4>
-          <button class="buy-btn">Buy Now</button>
+          <a href= "single_product.php?product_id=<?php echo $product['product_id']; ?>"><button class="buy-btn">Buy Now</button></a>
+
         </div>
       <?php endforeach; ?>
         
@@ -159,7 +160,8 @@
           </div>
           <h5 class="p-name"><?php echo $product['product_name'] ?></h5>
           <h4 class="p-price">$<?php echo $product['product_price'] ?></h4>
-          <button class="buy-btn">Buy Now</button>
+          <a href= "single_product.php?product_id=<?php echo $product['product_id']; ?>"><button class="buy-btn">Buy Now</button></a>
+
         </div>
        <?php  endforeach; ?>
         
@@ -191,7 +193,8 @@
           </div>
           <h5 class="p-name"><?php echo $product['product_name'] ?></h5>
           <h4 class="p-price">$<?php echo $product['product_price'] ?></h4>
-          <button class="buy-btn">Buy Now</button>
+          <a href= "single_product.php?product_id=<?php echo $product['product_id']; ?>"><button class="buy-btn">Buy Now</button></a>
+
         </div>
         <?php  endforeach;  ?>
         

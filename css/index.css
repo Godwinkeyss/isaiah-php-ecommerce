@@ -3,6 +3,12 @@
   position: 0;
   box-sizing: border-box;
 }
+.men{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
 body {
   font-family: 'Poppins', sans-serif;
 }
@@ -561,6 +567,16 @@ padding: 10px 20px;
 margin-top: 50px;
 border-radius: 5px;
 }
+.cart-quantity{
+  background-color: #fb774b;
+  color:#fff;
+  padding: 2px 4px;
+  border-radius: 50%;
+  margin: -4px;
+  font-size: 12px;
+  
+}
+
 @media screen and (max-width:800px){
   .shop{
     flex-direction: column;
