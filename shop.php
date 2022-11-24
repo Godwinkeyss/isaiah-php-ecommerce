@@ -1,6 +1,12 @@
+
+
+<?php  include('layouts/header.php') ?>
+<?php include('server/connection.php')  ?>
+
+
 <?php  
 
-include('./server/connection.php');
+
 // use the search secttion
 if(isset($_POST['search'])){
      //1 determine page number
@@ -26,7 +32,7 @@ if(isset($_POST['search'])){
 
      //3 products per page
 
-     $total_records_per_page = 1;
+     $total_records_per_page = 8;
      $offset = ($page_no-1) * $total_records_per_page;
  
      $previous_page = $page_no - 1;
@@ -97,7 +103,7 @@ if(isset($_POST['search'])){
 
 
 
-<?php  include('layouts/header.php') ?>
+
    <!-- navbar end -->
 
 
@@ -168,7 +174,7 @@ if(isset($_POST['search'])){
         
     <?php foreach($products as $row): ?>
        
-        <div onclick="window.location.href='single_product.html';" class="product col-lg-3 col-md-4 col-sm-12 text-center">
+        <div onclick="window.location.href='<?php echo "single_product.php?product_id=".$row['product_id'] ?>';" class="product col-lg-3 col-md-4 col-sm-12 text-center">
             <img src="./images/<?php echo $row['product_image'] ?>" alt="" class="img-fluid mb-3">
             <div class="star">
                 <i class="fas fa-star"></i>

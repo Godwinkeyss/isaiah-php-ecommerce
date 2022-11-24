@@ -1,8 +1,10 @@
+
+<?php  include('layouts/header2.php') ?>
 <?php 
 
 // not paid, delivered, shipped(key word)
 
-include('./server/connection.php');
+
 
 if(isset($_POST['order_details_btn']) && isset($_POST['order_id'])){
     $order_id = $_POST['order_id'];
@@ -43,7 +45,7 @@ function calculateTotalOrderPrice($order_details){
 ?>
 
 
-<?php  include('layouts/header.php') ?>
+
 
   <!-- order ddetails -->
   <section class="orders container my-5 py-3" id="orders">

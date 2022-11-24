@@ -1,89 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link rel="stylesheet" href="../css/bootstrap.rtl.min.css" />
-    <link rel="stylesheet" href="style.css" />
-    <title>Document</title>
-</head>
-<body>
-    <div class="d-flex" id="wrapper">
+<?php include('sidebar.php');  ?>
+<?php   
+   if(!isset($_SESSION['admin_logged_in'])){
+    header('location:login.php');
+    exit;
+   }
+
+?>
+
+<?php   
+
+     
+            // get orders
+
+
+            //1 determine page number
+
+            if(isset($_GET['page_no']) && $_GET['page_no'] != ""){
+                // if user has already entered page then ppage number is the one that he selected
+                $page_no = $_GET['page_no'];
+            }else{
+                // if user just entered then page default page is 1
+                $page_no =1;
+            }
+            //2 return number of products
+            $stmt1 =$pdo->prepare("SELECT COUNT(*) As total_records FROM orders ");
+
+            $stmt1->execute();
+
+            $total_records = $stmt1->fetchColumn();
+            // $total_records = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            // $products =$stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            //3 products per page
+
+            $total_records_per_page = 10;
+            $offset = ($page_no-1) * $total_records_per_page;
+
+            $previous_page = $page_no - 1;
+            $next_page = $page_no + 1;
+
+            $adjacents = "2";
+            $total_no_of_pages = ceil($total_records/$total_records_per_page);
+
+            // 4 get all products
+
+            $stmt2 =$pdo->prepare("SELECT * FROM orders  LIMIT $offset, $total_records_per_page");
+            $stmt2->execute();
+            $orders = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+
+            
+
+?>
+
+
         <!-- sidebar starts -->
-        <div class="bg-white " id="sidebar-wrapper">
-            <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">
-                <i class="fas fa-user-secret me-2"></i>Grapec
-            </div>
-            <div class="list-group list-group-flush my-3">
-                <a href="" class="list-group-item list-group-item-action bg-transparent second-text active">
-                    <i class="fas fa-tachometer-alt me-2"></i>Dashborad
-                </a>
-                <a href="" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                    <i class="fas fa-project-diagram me-2"></i>Project
-                </a>
-                <a href="" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                    <i class="fas fa-chart-line me-2"></i>Analytics
-                </a>
-                <a href="" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                    <i class="fas fa-paperclip me-2"></i>Reports
-                </a>
-                <a href="" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                    <i class="fas fa-shopping-cart me-2"></i>Store Mng
-                </a>
-                <a href="" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                    <i class="fas fa-gift me-2"></i>Product
-                </a>
-                <a href="" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                    <i class="fas fa-comment-dots me-2"></i>Chat
-                </a>
-                <a href="" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                    <i class="fas fa-map-marker me-2"></i>Outlet
-                </a>
-                <a href="" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
-                    <i class="fas fa-project-diagram me-2"></i>Logout
-                </a>
-            </div>
-        </div>
+        
         <!-- sidebar end -->
 
         <div id="page-content-wrapper">
-            <nav class="navbar navbar-expand-lg navbar-light transparent py-4 px-4">
-                <div class="d-flex align-items-center">
-                    <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
-                    <h2 class="fs-2 m-0">Dashboard</h2>
-                </div>
-                <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportContent" arial-controls="navbarSupportContent" arial-expanded="false"arial-label="Toggle navigation">
-                    span.navbar-toggler-icon
-                </button> -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item-dropdown">
-                            <a href="" class="nav-link drropdown-toggle second-text fw-bold" id="navbarDropdown" role="button" data-bs-toggle="dropdown" arial-expanded="false">
-                                <i class="fas.fa-user.me-2"></i>John Doe
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Profile</a></li>
-                                <li><a class="dropdown-item" href="#">Settings</a></li>
-                                <li><a class="dropdown-item" href="#">Logout</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-
+           <!-- navbar header -->
+              <?php include('header.php');  ?>
             <div class="container-fluid px-4">
                 <div class="row g-3 my-2">
                    <div class="col-md-3">
@@ -124,88 +101,142 @@
                    </div>
                 </div>
                 <div class="row my-5">
-                    <h3 class="fs-4 mb-3">Recent Orders</h3>
-                    <div class="col">
-                        <table class="table bg-white rounded shadow-sm table-hover">
+                    <h3 class="fs-4 mb-3"> Orders</h3>
+                    <?php if(isset($_GET['order_updated'])){  ?>
+                      <p class="text-center text-success"><?php echo $_GET['order_updated'] ?></p>
+                    <?php }  ?>
+
+                   <?php if(isset($_GET['order_failed'])){  ?>
+                      <p class="text-center text-danger"><?php echo $_GET['order_failed'] ?></p>
+                    <?php }  ?>
+                    <div class="col"  id="no-more-table">
+                        <table class="table bg-white  table-sm rounded shadow-sm table-hover">
                             <thead>
                                 <tr>
-                                    <th scope="col" width="50">#</th>
-                                    <th scope="col">Product</th>
-                                    <th scope="col">Customer</th>
-                                    <th scope="col">Price</th>
+                                    <th scope="col">Order Id</th>
+                                    <th scope="col">Order Status</th>
+                                    <th scope="col">User Id</th>
+                                    <th scope="col">Order Date</th>
+                                    <th scope="col">User Phone</th>
+                                    <th scope="col">User Address</th>
+                                    <th scope="col">Edit</th>
+                                    <th scope="col">Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php foreach( $orders as $order): ?>
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>Television</td>
-                                    <td>Jonny</td>
-                                    <td>$1200</td>
+                                    <th scope="row"data-title="Order Id"><?php echo $order['order_id']; ?></th>
+                                    <td data-title="Order Status"><?php echo $order['order_status']; ?></td>
+                                    <td data-title="User Id"><?php echo $order['user_id']; ?></td>
+                                    <td data-title="Order Date"><?php echo $order['order_date']; ?></td>
+                                    <td data-title="User Phone"><?php echo $order['user_phone']; ?></td>
+                                    <td data-title="User Address"><?php echo $order['user_address']; ?></td>
+                                    <td data-title="Edit"><a href="edit_order.php?order_id=<?php echo $order['order_id']  ?>" class="btn btn-primary btn-sm">Edit</a></td>
+                                    <td data-title="Delete"><a href="" class="btn btn-danger btn-sm">Delete</a></td>
                                 </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Television</td>
-                                    <td>Jonny</td>
-                                    <td>$1200</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Television</td>
-                                    <td>Jonny</td>
-                                    <td>$1200</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">4</th>
-                                    <td>Television</td>
-                                    <td>Jonny</td>
-                                    <td>$1200</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">5</th>
-                                    <td>Television</td>
-                                    <td>Jonny</td>
-                                    <td>$1200</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">6</th>
-                                    <td>Television</td>
-                                    <td>Jonny</td>
-                                    <td>$1200</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">7</th>
-                                    <td>Television</td>
-                                    <td>Jonny</td>
-                                    <td>$1200</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">8</th>
-                                    <td>Television</td>
-                                    <td>Jonny</td>
-                                    <td>$1200</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">9</th>
-                                    <td>Television</td>
-                                    <td>Jonny</td>
-                                    <td>$1200</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">10</th>
-                                    <td>Television</td>
-                                    <td>Jonny</td>
-                                    <td>$1200</td>
-                                </tr>
+                                <?php endforeach;  ?>
+                               
+                               
+                                
                             </tbody>
                         </table>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination mt-5">
+
+                    <li class="page-item <?php if($page_no<=1){echo 'disabled';} ?>">
+
+                        <a href="<?php if($page_no <=1){echo '#';}else{echo '?page_no='.($page_no-1);} ?>" class="page-link">Previous</a>
+
+                    </li>
+                    <li class="page-item"><a href="?page_no=1" class="page-link">1</a></li>
+                    <li class="page-item"><a href="?page_no=2" class="page-link">2</a></li>
+
+                    <?php if($page_no >=3){ ?>
+                    <li class="page-item"><a href="#" class="page-link">...</a></li>
+                    <li class="page-item"><a href="<?php echo '?page_no='.$page_no; ?>" class="page-link"><?php echo $page_no; ?></a></li>
+                    <?php   }?>
+
+                    <li class="page-item <?php if($page_no>=$total_no_of_pages){echo 'disabled';} ?>">
+
+                        <a href="<?php if($page_no >=$total_no_of_pages){echo '#';}else{echo '?page_no='.($page_no+1);} ?>" class="page-link">Next
+                    </a>
+
+                    </li>
+                </ul>
+            </nav>
                     </div>
+                    
                 </div>
+               
             </div>
         </div>
     </div>
 
 
-
+    <style>
+    @media screen and (max-width:450px) {
+        #no-more-table tbody,
+        #no-more-table tr,
+        #no-more-table td{
+            display: block;
+        }
+        #no-more-table thead tr{
+            position: absolute;
+            top:-9999px;
+            left: -9999px;
+        }
+        #no-more-table td{
+            position: relative;
+            padding-left: 70%;
+            border: none;
+            border-bottom: 1px solid #eee;
+        }
+        #no-more-table td::before{
+            content:attr(data-title);
+            position: absolute;
+            left: 6px;
+            font-weight: bold;
+        }
+        #no-more-table tr{
+            border-bottom: 2px solid #ccc;
+        }
+        .filem{
+            display: flex;
+            background-color: red!important;
+        }
+        
+        .table2 tr{
+            margin-right: 160px;
+            
+            
+        }
+        .table2 td{
+            /* display: flex !important;
+            align-items: center;
+            margin-left: 30px; */
+        }
+        .last{
+            width: 95%;
+            padding: 10px 20px;
+            margin-right: 10px !important;
+            margin-top: 20px;
+            
+        }
+        .ty{
+            height: 22px;
+            width: 52px !important;
+        }
+        
+        /* fhhghghghg */
+    }
+    @media screen and (max-width:450px) {
+        .bbb{
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+</style>
 
 
 

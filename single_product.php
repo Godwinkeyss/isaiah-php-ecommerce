@@ -1,6 +1,11 @@
+<?php session_start(); ?>
+
+<?php  include('layouts/header2.php') ?>
+<?php  include('server/connection.php') ?>
+
 <?php 
-session_start();
- include('./server/connection.php');
+
+
 if(isset($_GET['product_id'])){
     
 $product_id = $_GET['product_id'];
@@ -28,7 +33,7 @@ $product_id = $_GET['product_id'];
 
 
 
-<?php  include('layouts/header.php') ?>
+
 <!-- single -->
 
 <section class="single-product my-5 pt-5 container">

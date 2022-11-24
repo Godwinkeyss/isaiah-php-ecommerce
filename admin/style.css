@@ -4,8 +4,13 @@
     --second-bg-color:#c1efde;
     --second-text-color:#bbbec5;
 }
-
-
+body{
+    
+}
+.marg{
+    margin-right: 20px;
+    margin-top: -200px;
+}
 .primary-text{
     color:var(--main-text-color)
 }
@@ -63,6 +68,71 @@
     font-weight: bold;
     border:none;
 }
+.login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    margin-top: -70px;
+    
+    
+}
+.login form{
+    border: 1px solid #ccc;
+    padding: 40px 30px;
+    border-radius: 5px;
+}
+.login form .email,
+.login form .password
+{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.login-btn{
+    margin-top: 20px;
+}
+.login h1{
+    margin-bottom: 20px;
+}
+
+.login form input{
+    width: 400px;
+    height: 40px;
+    border-radius: 8px;
+}
+
+.login form input::placeholder{
+    letter-spacing: 0.1rem;
+    line-height: 1rem;
+}
+
+
+
+
+
+
+
+@media screen and (max-width:450px) {
+    .login form{
+        
+        padding: 20px 5px;
+        width: 400px;
+        
+    } 
+    .login{
+        margin-top: -100px;
+    }
+    .login form input{
+        width: 380px;
+        height: 40px;
+        border-radius: 8px;
+        
+    }
+}
+
 
 @media screen and (min-width:768px) {
     #sidebar-wrapper{
@@ -75,4 +145,5 @@
     #wrapper.toggled #sidebar-wrapper{
         margin-left: -15rem;
     }
+   
 }
