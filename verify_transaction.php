@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 $ref =$_GET['reference'];
 if($refv= ""){
     header("location:javascript://history.go(-1)");

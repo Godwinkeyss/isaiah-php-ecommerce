@@ -1,6 +1,11 @@
+
+
+<?php  include('layouts/header.php') ?>
+<?php  include('server/connection.php') ?>
+
 <?php
-  //  session_start();
-include('server/connection.php');
+    
+
 
  // if user has already register  then take user to account page
 if(isset($_SESSION['logged_in'])){
@@ -31,10 +36,10 @@ if(isset($_SESSION['logged_in'])){
       //   $stmt1->bindValue(':user_email',$email);
       //   $stmt1->execute();
       //  $stmt1->fetch(PDO::FETCH_ASSOC);
-       $query= $pdo-> prepare($sql);
-        $query-> bindParam(':user_email', $email, PDO::PARAM_STR);
-        $query-> execute();
-        $results = $query -> fetchAll(PDO::FETCH_OBJ);
+      $query= $pdo-> prepare($sql);
+      $query-> bindParam(':user_email', $email, PDO::PARAM_STR);
+      $query-> execute();
+      $results = $query -> fetchAll(PDO::FETCH_OBJ);
          
       //   if there is a user already register with the email
         if($query -> rowCount() > 0){
@@ -56,8 +61,8 @@ if(isset($_SESSION['logged_in'])){
             
             // if account was created successfully
             if($stmt->execute()){
-              $user_id =  $pdo->lastInsertId();
-              $_SESSION['user_id'] = $user_id;
+              $user_id = $pdo->lastInsertId();
+               $_SESSION['user_id'] = $user_id;
                $_SESSION['user_email'] = $email;
                $_SESSION['user_name'] = $name;
                $_SESSION['logged_in'] = true;
@@ -76,7 +81,7 @@ if(isset($_SESSION['logged_in'])){
 
 
 
-<?php  include('layouts/header.php') ?>
+
    <!-- navbar end -->
 
     <!-- register -->

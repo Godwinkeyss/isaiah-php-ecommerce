@@ -1,0 +1,76 @@
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  </head>
+  <body>
+    <h1>insert product!</h1>
+<div class="row">
+<div class="col-lg-3 col-md-6 col-sm-12"></div>
+<div class="col-lg-6 col-md-6 col-sm-12">
+
+
+    <form action="admin.php" method="POST" enctype="multipart/form-data">
+  
+  <div class="mb-3">
+    <label  class="form-label">Product name</label>
+    <input type="text" name="product_name"  class="form-control">
+  </div>
+  <div class="mb-3">
+    <label  class="form-label">product category</label>
+    <input type="text" name="category"value="" class="form-control">
+  </div>
+  <div class="mb-3">
+    <label  class="form-label">product description</label>
+    <textarea name="description"class="form-control" ></textarea>
+  </div>
+  <div class="mb-3">
+    <label  class="form-label">product image</label><br>
+    <input type="file" name="image1">
+  </div>
+  <div class="mb-3">
+    <label  class="form-label">product image2</label><br>
+    <input type="file" name="image2">
+  </div>
+  <div class="mb-3">
+    <label  class="form-label">product image3</label><br>
+    <input type="file" name="image3">
+  </div>
+  <div class="mb-3">
+    <label  class="form-label">product image4</label><br>
+    <input type="file" name="image4">
+  </div>
+  <div class="mb-3">
+    <label  class="form-label">product price</label>
+    <input type="number" name="price" step=".01" class="form-control" >
+  </div>
+  <div class="mb-3">
+    <label  class="form-label">product special offer</label>
+    <input type="number" name="special" class="form-control" >
+  </div>
+  <div class="mb-3">
+    <label  class="form-label">product color</label>
+    <input type="text" class="form-control"  name="color">
+  </div>
+  <button type="submit" class="btn btn-primary"  name="submit">Submit</button>
+</form>
+</div>
+<div class="col-lg-3 col-md-6 col-sm-12"></div>
+
+</div>
+
+
+
+
+
+
+
+
+
+

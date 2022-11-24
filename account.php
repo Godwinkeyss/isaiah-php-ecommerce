@@ -1,5 +1,5 @@
 <?php
-session_start();
+  include('layouts/header.php');
 include('./server/connection.php');
 
 
@@ -60,7 +60,7 @@ if(isset($_SESSION['logged_in'])){
 }
 
 ?>
-<?php  include('layouts/header.php') ?>
+
     <!-- Account -->
     <section class="my-5 py-5">
       <div class="container row mx-auto">
@@ -107,13 +107,15 @@ if(isset($_SESSION['logged_in'])){
     </section>
 
 
+    
+
      <!-- orders -->
      <section class="orders container my-5 py-3" id="orders">
         <div class="container mt-2">
           <h2 class="font-weight-bold text-center">Your Orders</h2>
           <hr class="mx-auto"/>
         </div>
-        <table class="mt-5 pt-5">
+        <table class="mt-5 pt-5  table-responsive table-sm">
           <tr>
             <th>Order id</th>
             <th>Order cost</th>

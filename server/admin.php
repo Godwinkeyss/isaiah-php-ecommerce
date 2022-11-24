@@ -13,8 +13,9 @@
  $product_image3  = '';
  $product_image4  = '';
  $product_color  = '';
-//if($_SERVER['REQUEST_METHOD'] ==='POST'){
-if(isset($_POST['submit'])){
+ $product_special_offer  = '';
+if($_SERVER['REQUEST_METHOD'] ==='POST'){
+// if(isset($_POST['submit'])){
 $product_name = $_POST['product_name'];
 $product_category = $_POST['category'];
 $product_description = $_POST['description'];
@@ -29,16 +30,16 @@ $product_color = $_POST['color'];
     // $product_image4 = $_FILES['image4']['name'] ?? null;
 
 
-    $product_tmp_image = $_FILES['image1']['tmp_name']?? null;
-    $product_tmp_image2 = $_FILES['image2']['tmp_name']?? null;
-    $product_tmp_image3 = $_FILES['image3']['tmp_name']?? null ;
-    $product_tmp_image4 = $_FILES['image4']['tmp_name']?? null;
+    // $product_tmp_image = $_FILES['image1']['tmp_name']?? null;
+    // $product_tmp_image2 = $_FILES['image2']['tmp_name']?? null;
+    // $product_tmp_image3 = $_FILES['image3']['tmp_name']?? null ;
+    // $product_tmp_image4 = $_FILES['image4']['tmp_name']?? null;
 
 
-    $product_image = $product_name."1.jpeg";
-    $product_image2 = $product_name."2.jpeg";
-    $product_image3 = $product_name."3.jpeg";
-    $product_image4 = $product_name."4.jpeg";
+    // $product_image = $product_name."1.jpeg";
+    // $product_image2 = $product_name."2.jpeg";
+    // $product_image3 = $product_name."3.jpeg";
+    // $product_image4 = $product_name."4.jpeg";
 
 
 
@@ -53,6 +54,9 @@ if(!$product_description){
     $errors[] = 'product description is required';
 }
 if(!$product_price){
+    $errors[] = 'product price is required';
+}
+if(!$product_special_offer){
     $errors[] = 'product price is required';
 }
 if(!$product_color){
@@ -71,9 +75,9 @@ if(!$product_image4){
     $errors[] = 'product image is required';
 }
 
-// if (!is_dir('images')){
-//     mkdir('images');
-// }
+if (!is_dir('images')){
+    mkdir('images');
+}
 
  if (empty($errors)){
     // move_uploaded_file( $product_tmp_image, "./images/$product_image" );
@@ -84,42 +88,78 @@ if(!$product_image4){
     // move_uploaded_file( $product_tmp_image2, "../images/".$product_image2 );
     // move_uploaded_file( $product_tmp_image3, "../images/".$product_image3 );
     // move_uploaded_file( $product_tmp_image4, "../images/".$product_image4 );
-    
+
+
     $imagePath = '';
     $imagePath2 = '';
     $imagePath3 = '';
     $imagePath4 = '';
-    if($product_image ){
-           $imagePath = '../images/'.randomString(8).'/'.$product_image;
-           mkdir(dirname($imagePath));
 
-        move_uploaded_file( $product_tmp_image,$imagePath);
-       
-    }
-    
-    if($product_image2 ){
-        $imagePath2 ='../images/'.randomString(8).'/'.$product_image2;
-        mkdir(dirname($imagePath2));
+    $product_image = $_FILES['image1'] ?? null;
+    $product_image2 = $_FILES['image2'] ?? null;
+    $product_image3 = $_FILES['image3'] ?? null;
+    $product_image4 = $_FILES['image4'] ?? null;
+    if($product_image){
 
-        move_uploaded_file( $product_tmp_image2,$imagePath2);
-       
+      $imagePath = '../images/'.randomString(8).'/'.$product_image['name'];
+      mkdir(dirname($imagePath));
+      move_uploaded_file($product_image['tmp_name'], $imagePath);
     }
-    if($product_image3){
-        $imagePath3 = '../images/'.randomString(8).'/'.$product_image3;
-        mkdir(dirname($imagePath3));
-            
-        move_uploaded_file($product_tmp_image3,$imagePath3);
-       
-    }
-    if($product_image4){
-        $imagePath4 = '../images/'.randomString(8).'/'.$product_image4;
-        mkdir(dirname($imagePath4));
+    if($product_image2){
 
-        move_uploaded_file($product_tmp_image4,$imagePath4);
-       
+      $imagePath2 = '../images/'.randomString(8).'/'.$product_image2['name'];
+      mkdir(dirname($imagePath2));
+      move_uploaded_file($product_image2['tmp_name'], $imagePath2);
     }
    
+    if($product_image3){
 
+      $imagePath3 = '../images/'.randomString(8).'/'.$product_image3['name'];
+      mkdir(dirname($imagePath3));
+      move_uploaded_file($product_image3['tmp_name'], $imagePath3);
+    }
+    
+    if($product_image4){
+
+      $imagePath4 = '../images/'.randomString(8).'/'.$product_image4['name'];
+      mkdir(dirname($imagePath4));
+      move_uploaded_file($product_image4['tmp_name'], $imagePath4);
+    }
+    
+    
+   
+
+    // if($product_image ){
+    //        $imagePath = '../images/'.randomString(8).'/'.$product_image;
+    //        mkdir(dirname($imagePath));
+
+    //     move_uploaded_file( $product_tmp_image,$imagePath);
+       
+    // }
+    
+    // if($product_image2 ){
+    //     $imagePath2 ='../images/'.randomString(8).'/'.$product_image2;
+    //     mkdir(dirname($imagePath2));
+
+    //     move_uploaded_file( $product_tmp_image2,$imagePath2);
+       
+    // }
+    // if($product_image3){
+    //     $imagePath3 = '../images/'.randomString(8).'/'.$product_image3;
+    //     mkdir(dirname($imagePath3));
+            
+    //     move_uploaded_file($product_tmp_image3,$imagePath3);
+       
+    // }
+    // if($product_image4){
+    //     $imagePath4 = '../images/'.randomString(8).'/'.$product_image4;
+    //     mkdir(dirname($imagePath4));
+
+    //     move_uploaded_file($product_tmp_image4,$imagePath4);
+       
+    // }
+   
+    
 $stmt = $pdo->prepare("INSERT INTO products (product_name,product_category,product_description,product_image,product_image2,product_image3,product_image4,product_price,product_special_offer,product_color) VALUES(:product_name,:product_category,:product_description,:product_image,:product_image2,:product_image3,:product_image4,:product_price,:product_special_offer,:product_color)");
 
 $stmt->bindValue(':product_name', $product_name);
@@ -140,8 +180,8 @@ $stmt->bindValue(':product_color',$product_color);
   header('Location: admin.php');
 
 }
+
 }
-//}
 
 function randomString($n){
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -215,11 +255,11 @@ function randomString($n){
   </div>
   <div class="mb-3">
     <label  class="form-label">product special offer</label>
-    <input type="number" name="special" class="form-control" value="<?php echo $product_color ?>">
+    <input type="number" name="special" class="form-control" value="<?php echo $product_special_offer ?>">
   </div>
   <div class="mb-3">
     <label  class="form-label">product color</label>
-    <input type="text" class="form-control"  name="color">
+    <input type="text" class="form-control"  name="color"  value="<?php echo $product_color ?>">
   </div>
   <button type="submit" class="btn btn-primary"  name="submit">Submit</button>
 </form>

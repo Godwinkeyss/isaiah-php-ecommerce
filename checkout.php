@@ -1,6 +1,10 @@
-<?php
-  session_start();
 
+
+<?php  include('layouts/header.php') ?>
+
+<?php
+
+ 
   if( !empty($_SESSION['cart'])){
 
     // let user in
@@ -17,7 +21,7 @@
 
 
 
-<?php  include('layouts/header.php') ?>
+
       <!-- navbar end -->
 
 <!-- checkout -->

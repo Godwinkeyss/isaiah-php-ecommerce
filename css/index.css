@@ -340,8 +340,8 @@ footer .copyright img {
   cursor: pointer;
 }
 .small-img {
-  width: 130px;
-  height: 130px;
+  width: 100px;
+  height: 100px;
   background-size: cover;
   object-fit: cover;
 }
@@ -442,14 +442,14 @@ th:last-child {
 /* login */
 
 #login-form {
-  width: 50%;
+  width: 600px;
   margin: 5px auto;
   text-align: center;
   padding: 20px;
   border-top: 1px solid #fb774b;
 }
 #login-form input {
-  width: 50%;
+  width: 100%;
   margin: 5px auto;
 }
 #login-form #login-btn {
@@ -461,14 +461,14 @@ th:last-child {
 }
 /* Register */
 #register-form {
-  width: 50%;
+  width: 100%;
   margin: 5px auto;
   text-align: center;
   padding: 20px;
   border-top: 1px solid #fb774b;
 }
 #register-form input {
-  width: 50%;
+  width: 100%;
   margin: 5px auto;
 }
 #register-form #register-btn {
@@ -581,5 +581,11 @@ border-radius: 5px;
   .shop{
     flex-direction: column;
     
+  }
+  #login-form{
+    width: 100%;
+  }
+  #register-form{
+    width: 100%;
   }
 }
